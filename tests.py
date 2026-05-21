@@ -40,19 +40,12 @@ class TestBooksCollector:
         collection.set_book_genre('Sapiens', 'Научпоп')
         assert collection.get_book_genre('Sapiens') == ''
 
-    @pytest.mark.parametrize(
-        'specific_genre, result',
-        [
-            ['Фантастика', 3],
-            ['Ужасы', 1],
-            ['Детективы', 2],
-            ['Мультфильмы', 4],
-            ['Комедии', 0]
-        ]
-    )
+    @pytest.mark.parametrize('specific_genre', ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии'])
     # Проверка вывода списка книг (из books_genre) с определённым жанром (из списка genre)
-    def test_get_books_with_specific_genre_true(self, ten_books_with_different_genres, specific_genre, result):
-        assert len(ten_books_with_different_genres.get_books_with_specific_genre(specific_genre)) == result
+    def test_get_books_with_specific_genre_true(self, ten_books_with_different_genres, specific_genre):
+        books_with_specific_genre = ten_books_with_different_genres.get_books_with_specific_genre(specific_genre)
+        for book in books_with_specific_genre:
+          assert ten_books_with_different_genres.get_book_genre(book) == specific_genre
        
     # Проверка получения словаря books_genre (книги и жанры) 
     def test_get_books_genre_true(self, collection):

@@ -60,7 +60,7 @@ class TestBooksCollector:
         collection.set_book_genre('Тревожные люди', 'Комедии')
         assert collection.get_books_genre() == {'Тревожные люди': 'Комедии'}
         
-    # Проверка получения списка книг, подходящих детям (в списке должно остаться 7/10 книг)
+    # Проверка получения списка книг, подходящих детям (исключая книги с жанром из genre_age_rating)
     def test_get_books_for_children_books_with_age_rating_excluded(self, ten_books_with_different_genres):
         children_books = ten_books_with_different_genres.get_books_for_children()
         for book in children_books:

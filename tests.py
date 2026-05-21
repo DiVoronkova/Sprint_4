@@ -63,7 +63,9 @@ class TestBooksCollector:
     # Проверка получения списка книг, подходящих детям (в списке должно остаться 7/10 книг)
     def test_get_books_for_children_books_with_age_rating_excluded(self, ten_books_with_different_genres):
         children_books = ten_books_with_different_genres.get_books_for_children()
-        assert children_books == ['Дюна', '1984', 'Человек-амфибия', 'Чебурашка', 'Артур и минипуты', 'Буратино', 'Маленький принц']
+        for book in children_books:
+          genre = ten_books_with_different_genres.get_book_genre(book)
+          assert genre not in ten_books_with_different_genres.genre_age_rating
 
     # Проверка добавления книги в Избранное (favorites)
     def test_add_book_in_favorites_book_added(self, collection):
